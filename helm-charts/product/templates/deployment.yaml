@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}   # release name will include service name and environment (e.g., product-green)
+  labels:
+    app: {{ .Values.name }}
+    env: {{ .Values.env }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+      env: {{ .Values.env }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+        env: {{ .Values.env }}
+    spec:
+      containers:
+        - name: {{ .Values.name }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          # Example environment variables (e.g., database connection)
+          env:
+            - name: DB_HOST
+              value: {{ .Values.dbHost | default("") | quote }}
+            - name: DB_USER
+              value: {{ .Values.dbUser | default("") | quote }}
+            - name: DB_PASS
+              value: ""  # password could be set via a Secret (left blank here for demo)

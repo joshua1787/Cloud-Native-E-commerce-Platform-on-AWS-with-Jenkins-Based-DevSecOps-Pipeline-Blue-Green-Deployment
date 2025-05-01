@@ -1,0 +1,17 @@
+name: product                 # base name for app
+env: blue                     # environment label (blue or green)
+replicaCount: 2
+image:
+  repository: "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/product"
+  tag: "latest"
+service:
+  port: 80
+# (Optional) database connection info (if needed by app)
+# dbHost: "ecom-database.<cluster-region>.rds.amazonaws.com"
+# dbUser: "admin"
+# dbName: "ecommerce"
+product:
+  env: blue   # or green
+  image:
+    repository: "<your-ecr-uri>"
+    tag: "latest"

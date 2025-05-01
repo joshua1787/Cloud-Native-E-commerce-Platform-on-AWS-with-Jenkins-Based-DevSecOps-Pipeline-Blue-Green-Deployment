@@ -1,0 +1,6 @@
+apiVersion: v2
+name: auth-service
+description: Helm chart for Auth microservice
+version: 1.0.0
+appVersion: "1.0.0"
+# This is the chart for the Auth microservice of the e-commerce platform.

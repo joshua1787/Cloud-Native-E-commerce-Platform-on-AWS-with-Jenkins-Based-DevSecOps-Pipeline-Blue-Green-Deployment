@@ -1,0 +1,14 @@
+name: order
+env: blue
+replicaCount: 2
+image:
+  repository: "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/order"
+  tag: "latest"
+service:
+  port: 80
+# (Order service might use DB in a real scenario, e.g., for order persistence)
+product:
+  env: blue   # or green
+  image:
+    repository: "<your-ecr-uri>"
+    tag: "latest"
