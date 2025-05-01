@@ -5,6 +5,10 @@ This project demonstrates a fully containerized, microservices-based e-commerce 
 
 ---
 
+## 🧠 Architecture Diagram
+![Architecture Diagram](./docs/architecture.png)
+
+
 ## 🔧 Tech Stack
 
 - **AWS Services:** EKS, ECR, RDS, ALB, IAM, WAF, S3, Route53  
