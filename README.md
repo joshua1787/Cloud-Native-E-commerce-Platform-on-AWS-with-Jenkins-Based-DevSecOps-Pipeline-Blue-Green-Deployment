@@ -1,47 +1,44 @@
-Cloud-Native E-commerce Platform on AWS with Jenkins-Based DevSecOps Pipeline
+  
+# Cloud-Native E-commerce Platform on AWS with Jenkins-Based DevSecOps Pipeline
 
 This project demonstrates a fully containerized, microservices-based e-commerce platform deployed on AWS using Amazon EKS, Jenkins CI/CD, Terraform-based infrastructure, Helm charts, Blue-Green deployment, and DevSecOps automation.
 
-🔧 Tech Stack
+---
 
-AWS Services: EKS, ECR, RDS, ALB, IAM, WAF, S3, Route53
+## 🔧 Tech Stack
 
-CI/CD: Jenkins (EC2), Helm, GitHub, Trivy
+- **AWS Services:** EKS, ECR, RDS, ALB, IAM, WAF, S3, Route53  
+- **CI/CD:** Jenkins (EC2), Helm, GitHub, Trivy  
+- **Infrastructure as Code:** Terraform (modular)  
+- **Containers & Orchestration:** Docker, Kubernetes, Helm  
+- **Security:** AWS WAF, Trivy scanning, IAM policies  
+- **Deployment Strategy:** Blue-Green via ALB Ingress  
 
-Infrastructure as Code: Terraform (modular)
+---
 
-Containers & Orchestration: Docker, Kubernetes, Helm
+## 🚀 Features
 
-Security: AWS WAF, Trivy scanning, IAM policies
+- Modular Terraform-based infrastructure  
+- Jenkins pipelines with Trivy scanning  
+- Blue-Green deployments via Helm and ALB  
+- Canary-like Ingress switching with patch automation  
+- Three microservices: Product, Auth, Order  
+- Centralized Ingress managed per path  
 
-Deployment Strategy: Blue-Green via ALB Ingress
+---
 
-🚀 Features
+## 🧠 Architecture Highlights
 
-Modular Terraform-based infrastructure
+- Microservices deployed as separate Helm releases (blue/green)  
+- Jenkins pipeline automates Docker build, Trivy scan, Helm deploy  
+- ALB Ingress Controller used for traffic routing  
+- Ingress `kubectl patch` used to switch traffic between environments  
 
-Jenkins pipelines with Trivy scanning
+---
 
-Blue-Green deployments via Helm and ALB
+## 📁 Folder Structure
 
-Canary-like Ingress switching with patch automation
-
-Three microservices: Product, Auth, Order
-
-Centralized Ingress managed per path
-
-🧠 Architecture Highlights
-
-Microservices deployed as separate Helm releases (blue/green)
-
-Jenkins pipeline automates Docker build, Trivy scan, Helm deploy
-
-ALB Ingress Controller used for traffic routing
-
-Ingress kubectl patch used to switch traffic
-
-📁 Folder Structure
-
+```bash
 .
 ├── microservices/           # Product, Auth, Order Node.js apps
 ├── helm-charts/            # Helm charts per microservice
@@ -50,28 +47,44 @@ Ingress kubectl patch used to switch traffic
 ├── scripts/                # Automation scripts for promotion/rollback
 ├── README.md
 └── Jenkinsfile
+```
 
-🔄 Blue-Green Workflow
+---
 
-Deploy Green environment via Jenkins
+## 🔄 Blue-Green Workflow
 
-Run health checks / tests
+1. **Deploy Green environment via Jenkins**  
+2. **Run health checks or smoke tests**  
+3. **Execute script:**  
+   ```bash
+   ./scripts/switch-ingress-to-green.sh
+   ```
+4. **Rollback if needed:**  
+   ```bash
+   ./scripts/switch-ingress-to-blue.sh
+   ./rollback-to-blue.sh <last-stable-tag>
+   ```
 
-Execute script: scripts/switch-ingress-to-green.sh
+---
 
-Rollback (if needed):
+## ⚙️ Usage
 
-./scripts/switch-ingress-to-blue.sh
-./rollback-to-blue.sh <last-stable-tag>
+```bash
+# Initialize and apply infrastructure
+terraform init && terraform apply
 
-⚙️ Usage
+# Deploy green environment with new build tag
+./promote-green.sh <tag>
 
-terraform init && terraform apply     # Infra provisioning
-./promote-green.sh <tag>              # Deploy to green
-./switch-ingress-to-green.sh          # Route traffic to green
+# Route traffic to green
+./switch-ingress-to-green.sh
+```
 
-✅ Author
+---
 
-Built by Joshua Veeraiah — AWS Certified DevOps Engineer – Professional
+## ✅ Author
 
-For interview use, demo walkthroughs, and DevOps portfolio showcase.
+**Joshua Veeraiah**  
+AWS Certified DevOps Engineer – Professional  
+
+For interview use, technical demonstrations, and DevOps portfolio showcase.
